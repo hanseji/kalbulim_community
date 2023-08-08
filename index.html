@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapquest example</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src = "https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
+    <script src = "https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+    <script src = "https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js" defer></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f51423cd5ba6a4fc2b385e81379cd04"></script>
+    <script src="script.js" defer></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="">진행 여부</div>
+    <input type="radio" name="chk_info" value="예고">예고
+    <input type="radio" name="chk_info" value="사건 종료">사건 종료
+    <div id="">출처</div>
+    <input type="text" id="location_input">
+    <div id="location">지도에서 제보하고자 하는 위치를 클릭해주세요</div>
+    <button onclick="upload()">제보하기</button>
+  </body>
+</html>
