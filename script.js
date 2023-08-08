@@ -21,12 +21,6 @@ let location_array = [0, 0];
 
 const db = firebase.firestore();
 
-map.on('click', function(f) { 
-  document.getElementById('location').innerText = "위치 : " + f.latlng['lat'] + " " + f.latlng['lng'];
-  location_array[0] = f.latlng['lat']
-  location_array[1] = f.latlng['lng']
-});
-
 function calculate_date(date) {
   var today = new Date();
 
