@@ -121,6 +121,7 @@ function upload() {
   } else {
     alert("출처는 웹주소로 적어주세요")
   }
+}
 
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var options = { //지도를 생성할 때 필요한 기본 옵션
