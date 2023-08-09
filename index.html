@@ -1,27 +1,66 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapquest example</title>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-    <script src = "https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
-    <script src = "https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
-    <script src = "https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js" defer></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f51423cd5ba6a4fc2b385e81379cd04"></script>
-    <script src="script.js" defer></script>
-    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
-    <link href="style.css" rel="stylesheet">
-  </head>
-  <body>
-    <div id="map"></div>
-    <div id="">진행 여부</div>
-    <input type="radio" name="chk_info" value="예고">예고
-    <input type="radio" name="chk_info" value="사건 종료">사건 종료
-    <div id="">출처</div>
-    <input type="text" id="location_input">
-    <div id="location">지도에서 제보하고자 하는 위치를 클릭해주세요</div>
-    <button onclick="upload()">제보하기</button>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapquest example</title>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+  <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js" defer></script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f51423cd5ba6a4fc2b385e81379cd04&libraries=services,clusterer"></script>
+  <script src="script.js" defer></script>
+  <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="over_layer">
+    <div id="report_box">
+      <div id="title">제보 대상</div>
+      <label><input type="radio" name="report_type" checked="checked" value="칼부림"
+          onclick='changeReportType()'>칼부림</label>
+      <label><input type="radio" name="report_type" value="태풍" onclick='changeReportType()'>태풍</label>
+      <div id="" style="margin-top: 10px;">진행 여부</div>
+      <div style="display: flex;">
+        <label style="display: flex;"><input type="radio" id="radio_1" name="chk_info" checked="checked" value="예고">
+          <div id="radio_label_1">예고</div>
+        </label>
+        <label style="display: flex;"><input type="radio" id="radio_2" name="chk_info" value="검거">
+          <div id="radio_label_2">검거</div>
+        </label>
+        <label style="display: flex;"><input type="radio" id="radio_3" name="chk_info" value="사건 종료">
+          <div id="radio_label_3">사건 발생</div>
+        </label>
+      </div>
+      <div style="display: flex;">
+        <div style="margin-top: 10px;">
+          <div id="">출처(링크)</div>
+          <input type="text" id="location_input">
+        </div>
+      </div>
+      <div class="option">
+        <div>
+          <form onsubmit="searchPlaces(); return false;" style="margin-top: 10px; margin-bottom:20px">
+            위치 : <input type="text" value="서울" id="keyword" size="15">
+            <button type="submit">검색하기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex;">
+      <button onclick="upload()">제보하기</button>
+      <div id="" style="margin-left: 20px; margin-right: 4px;">필터</div>
+      <label><input type='checkbox' name='filter_type' value='칼부림' checked="checked"
+          onclick='getCheckboxValue()' />칼부림</label>
+      <label><input type='checkbox' name='filter_type' value='태풍' checked="checked"
+          onclick='getCheckboxValue()' />태풍</label>
+    </div>
+  </div>
+  <div id="map"></div>
+</body>
+
 </html>
