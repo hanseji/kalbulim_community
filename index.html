@@ -10,11 +10,12 @@
   <meta property="og:title" content="위험쓰 WeHomes">
   <meta property="og:image" content="https://wehomes.netlify.app/static/image/logo.png">
   <meta property="og:description" content="위험, 재난 상황을 공유하는 지도 기반 정보 공유 서비스">
-  
-  <meta name="twitter:card" content="Wehomes는 지도를 기반으로 누구나 위험 정보를 공유할 수 있으며 정보 인증으로 믿을만한 정보를 제공합니다. 또한, 모두가 정보 공유에 참가할 수 있어 어느 정보 공유 서비스보다 정보 공급이 빠릅니다." /> 
-  <meta name="twitter:title" content="위험쓰 WeHomes" /> 
-  <meta name="twitter:description" content="위험, 재난 상황을 공유하는 지도 기반 정보 공유 서비스" /> 
-  <meta name="twitter:image" content="https://wehomes.netlify.app/" /> 
+
+  <meta name="twitter:card"
+    content="Wehomes는 지도를 기반으로 누구나 위험 정보를 공유할 수 있으며 정보 인증으로 믿을만한 정보를 제공합니다. 또한, 모두가 정보 공유에 참가할 수 있어 어느 정보 공유 서비스보다 정보 공급이 빠릅니다." />
+  <meta name="twitter:title" content="위험쓰 WeHomes" />
+  <meta name="twitter:description" content="위험, 재난 상황을 공유하는 지도 기반 정보 공유 서비스" />
+  <meta name="twitter:image" content="https://wehomes.netlify.app/" />
   <!-- 다음의 태그는 필수는 아니지만, 포함하는 것을 추천함 -->
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -34,9 +35,11 @@
 <body>
   <div id="over_layer">
     <div id="report_box">
+      <div style="display: flex; justify-content: space-between; cursor: pointer;" onclick="close_report_box()">
       <div id="title">제보 대상</div>
-      <label><input type="radio" name="report_type" value="칼부림"
-          onclick='changeReportType()'>칼부림</label>
+      <div class="close close1"></div>
+    </div>
+      <label><input type="radio" name="report_type" value="칼부림" onclick='changeReportType()'>칼부림</label>
       <label><input type="radio" name="report_type" value="태풍" checked="checked" onclick='changeReportType()'>태풍</label>
       <div id="" style="margin-top: 10px;">진행 여부</div>
       <div style="display: flex;">
@@ -79,10 +82,10 @@
       <div id="" style="margin-left: 20px; margin-right: 4px;">필터</div>
       <label><input type='checkbox' name='filter_type' value='칼부림' checked="checked"
           onclick='getCheckboxValue()' />칼부림</label>
-          <label><input type='checkbox' name='filter_type' value='태풍' checked="checked"
-              onclick='getCheckboxValue()' />태풍</label>
-              <label><input type='checkbox' name='filter_type' value='높은 신뢰도' checked="checked"
-                  onclick='getCheckboxValue()' />높은 신뢰도</label>
+      <label><input type='checkbox' name='filter_type' value='태풍' checked="checked"
+          onclick='getCheckboxValue()' />태풍</label>
+      <label><input type='checkbox' name='filter_type' value='높은 신뢰도' checked="checked"
+          onclick='getCheckboxValue()' />높은 신뢰도</label>
     </div>
   </div>
   <div id="map"></div>

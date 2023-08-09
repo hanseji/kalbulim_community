@@ -87,6 +87,10 @@ function upload() {
   }
 }
 
+function close_report_box(){
+  document.getElementById('report_box').style.display = "none";
+}
+
 var locPosition = new kakao.maps.LatLng(37.4812845080678, 126.952713197762)
 
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
