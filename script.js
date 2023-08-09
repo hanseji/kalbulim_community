@@ -72,7 +72,8 @@ function upload() {
             source: document.getElementById('location_input').value,
             type: reportTypeNodeList,
             upload_time: new Date(),
-            subcontent: document.getElementById('gitar_input').value
+            subcontent: document.getElementById('gitar_input').value,
+            location_string: document.getElementById('keyword').value
           });
         alert("제보 완료되었습니다.");
         removeMarker();
@@ -282,9 +283,11 @@ function showKalbilimPoint() {
           if(result.data().subcontent == undefined) {subcontent = ""}
           var source = result.data().source
           if(result.data().source == undefined) {source = ""}
+          var location_string = "("+result.data().location_string+")"
+          if(result.data().location_string == undefined) {location_string = ""}
           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
           var content = `<div id="info">
-          <b>${result.data().type + " " + result.data().danger_grade}</b>
+          <b>${result.data().type + " " + result.data().danger_grade} ${location_string}</b>
           ${calculate_date(result.data().upload_time.toDate())}<br>
           <a href=${source}>${source}</a><br>
           ${subcontent}<br>
@@ -319,12 +322,14 @@ function showTypoonPoint() {
                 trust = '낮음'
           }
           var subcontent = result.data().subcontent
-          if(result.data().subcontent === "undefined" ) {subcontent = ""}
+          if(result.data().subcontent == undefined) {subcontent = ""}
           var source = result.data().source
-          if(result.data().source === "undefined" ) {source = ""}
+          if(result.data().source == undefined) {source = ""}
+          var location_string = "("+result.data().location_string+")"
+          if(result.data().location_string == undefined) {location_string = ""}
           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
           var content = `<div id="info">
-          <b>${result.data().type + " " + result.data().danger_grade}</b>
+          <b>${result.data().type + " " + result.data().danger_grade} ${location_string}</b>
           ${calculate_date(result.data().upload_time.toDate())}<br>
           <a href=${source}>${source}</a><br>
           ${subcontent}<br>
@@ -354,12 +359,14 @@ function showHighTrustTypoonPoint() {
               imageOption = {offset: new kakao.maps.Point(16, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
               trust = '높음'
           var subcontent = result.data().subcontent
-          if(result.data().subcontent === "undefined" ) {subcontent = ""}
+          if(result.data().subcontent == undefined) {subcontent = ""}
           var source = result.data().source
-          if(result.data().source === "undefined" ) {source = ""}
+          if(result.data().source == undefined) {source = ""}
+          var location_string = "("+result.data().location_string+")"
+          if(result.data().location_string == undefined) {location_string = ""}
           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
           var content = `<div id="info">
-          <b>${result.data().type + " " + result.data().danger_grade}</b>
+          <b>${result.data().type + " " + result.data().danger_grade} ${location_string}</b>
           ${calculate_date(result.data().upload_time.toDate())}<br>
           <a href=${source}>${source}</a><br>
           ${subcontent}<br>
@@ -392,9 +399,11 @@ function showHighTrustKalbilimPoint() {
           if(result.data().subcontent == undefined) {subcontent = ""}
           var source = result.data().source
           if(result.data().source == undefined) {source = ""}
+          var location_string = "("+result.data().location_string+")"
+          if(result.data().location_string == undefined) {location_string = ""}
           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
           var content = `<div id="info">
-          <b>${result.data().type + " " + result.data().danger_grade}</b>
+          <b>${result.data().type + " " + result.data().danger_grade} ${location_string}</b>
           ${calculate_date(result.data().upload_time.toDate())}<br>
           <a href=${source}>${source}</a><br>
           ${subcontent}<br>
