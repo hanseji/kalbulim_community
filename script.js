@@ -66,7 +66,7 @@ function upload() {
       if (location_array[0] != null && location_array[1] != null) {
         db.collection('location')
           .add({
-            check: true,
+            check: false,
             danger_grade: chkInfoNodeList,
             location: location_array,
             source: document.getElementById('location_input').value,
