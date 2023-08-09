@@ -62,7 +62,7 @@ function upload() {
     const reportTypeNodeList = document.querySelector('input[name="report_type"]:checked').value
 
     let regex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    if (document.getElementById('location_input').value == null || regex.test(document.getElementById('location_input').value) == true) {
+    if (document.getElementById('location_input').value == "" || regex.test(document.getElementById('location_input').value) == true) {
       if (location_array[0] != null && location_array[1] != null) {
         db.collection('location')
           .add({
