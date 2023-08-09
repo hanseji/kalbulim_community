@@ -337,6 +337,75 @@ function showTypoonPoint() {
   //clusterer.addMarkers(markers_typoon);
 }
 
+
+function showHighTrustTypoonPoint() {
+  db.collection('location') //원하는 컬렉션 선택하기, 지금은 product를 선택함
+    //.orderBy('like', "desc") //정렬방식 최신자료 먼저 정렬 가능함
+    //.limit(1) //가지고 오는 갯수를 제한 할 수 있다.
+    .where("check", "==", true)
+    .where("type", "==", "태풍")
+    .get() //이제까지 정보를 통해 자료를 가져오라는 의미
+    .then((doc) => { // 결과를 then으로 받을 수 있다.
+      doc.forEach((result) => {
+        if (result.data().location != undefined) {
+          var trust = "";
+          var imageSrc = '/static/image/typhoon_True.png', // 마커이미지의 주소입니다    
+              imageSize = new kakao.maps.Size(36, 50), // 마커이미지의 크기입니다
+              imageOption = {offset: new kakao.maps.Point(16, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+              trust = '높음'
+          var subcontent = result.data().subcontent
+          if(result.data().subcontent === "undefined" ) {subcontent = ""}
+          var source = result.data().source
+          if(result.data().source === "undefined" ) {source = ""}
+          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+          var content = `<div id="info">
+          <b>${result.data().type + " " + result.data().danger_grade}</b>
+          ${calculate_date(result.data().upload_time.toDate())}<br>
+          <a href=${source}>${source}</a><br>
+          ${subcontent}<br>
+          신뢰도 ${trust} 
+          </div>`
+          addTypoonMarker(markerImage, new kakao.maps.LatLng(result.data().location[0], result.data().location[1]), content);
+        }
+      })
+    });
+  //clusterer.addMarkers(markers_typoon);
+}
+
+function showHighTrustKalbilimPoint() {
+  console.log('갯수')
+  db.collection('location') //원하는 컬렉션 선택하기, 지금은 product를 선택함
+    //.orderBy('like', "desc") //정렬방식 최신자료 먼저 정렬 가능함
+    //.limit(1) //가지고 오는 갯수를 제한 할 수 있다.
+    .where("check", "==", true)
+    .where("type", "==", "칼부림")
+    .get() //이제까지 정보를 통해 자료를 가져오라는 의미
+    .then((doc) => { // 결과를 then으로 받을 수 있다.
+      doc.forEach((result) => {
+        if (result.data().location != undefined) {
+          var trust = "";
+          var imageSrc = '/static/image/knife_True.png', // 마커이미지의 주소입니다    
+              imageSize = new kakao.maps.Size(36, 50), // 마커이미지의 크기입니다
+              imageOption = {offset: new kakao.maps.Point(16, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+              trust = '높음'
+          var subcontent = result.data().subcontent
+          if(result.data().subcontent == undefined) {subcontent = ""}
+          var source = result.data().source
+          if(result.data().source == undefined) {source = ""}
+          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+          var content = `<div id="info">
+          <b>${result.data().type + " " + result.data().danger_grade}</b>
+          ${calculate_date(result.data().upload_time.toDate())}<br>
+          <a href=${source}>${source}</a><br>
+          ${subcontent}<br>
+          신뢰도 ${trust} 
+          </div>`
+          addKalbulimMarker(markerImage, new kakao.maps.LatLng(result.data().location[0], result.data().location[1]), content);
+        }
+      })
+    });
+  //clusterer.addMarkers(markers_kalbulin);
+}
 var ps = new kakao.maps.services.Places();
 // 키워드로 장소를 검색합니다
 //searchPlaces();
@@ -451,8 +520,8 @@ function changeReportType(){
   }
 }
 
-showKalbilimPoint()
-showTypoonPoint()
+showHighTrustKalbilimPoint()
+showHighTrustTypoonPoint()
 function getCheckboxValue() {
 
   // 선택된 목록 가져오기
@@ -464,15 +533,26 @@ function getCheckboxValue() {
   selectedEls.forEach((el) => {
     result.push(el.value);
   });
+  removeKalbilimPoint();
+  removeTypoonPoint();
+  
   if (result.indexOf("칼부림") == -1) {
     removeKalbilimPoint();
   } else {
-    showKalbilimPoint();
+    if (result.indexOf("높은 신뢰도") == -1) {
+      showKalbilimPoint();
+    } else {
+      showHighTrustKalbilimPoint();
+    }
   }
 
   if (result.indexOf("태풍") == -1) {
     removeTypoonPoint();
   } else {
-    showTypoonPoint();
+    if (result.indexOf("높은 신뢰도") == -1) {
+      showTypoonPoint();
+    } else {
+      showHighTrustTypoonPoint();
+    }
   }
 }
