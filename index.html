@@ -22,9 +22,9 @@
   <div id="over_layer">
     <div id="report_box">
       <div id="title">제보 대상</div>
-      <label><input type="radio" name="report_type" checked="checked" value="칼부림"
+      <label><input type="radio" name="report_type" value="칼부림"
           onclick='changeReportType()'>칼부림</label>
-      <label><input type="radio" name="report_type" value="태풍" onclick='changeReportType()'>태풍</label>
+      <label><input type="radio" name="report_type" value="태풍" checked="checked" onclick='changeReportType()'>태풍</label>
       <div id="" style="margin-top: 10px;">진행 여부</div>
       <div style="display: flex;">
         <label style="display: flex;"><input type="radio" id="radio_1" name="chk_info" checked="checked" value="예고">
@@ -36,11 +36,20 @@
         <label style="display: flex;"><input type="radio" id="radio_3" name="chk_info" value="사건 종료">
           <div id="radio_label_3">사건 발생</div>
         </label>
+        <label style="display: flex;"><input type="radio" id="radio_3" name="chk_info" value="기타">
+          <div id="radio_label_3">기타</div>
+        </label>
       </div>
       <div style="display: flex;">
         <div style="margin-top: 10px;">
           <div id="">출처(링크)</div>
           <input type="text" id="location_input">
+        </div>
+      </div>
+      <div style="display: flex;">
+        <div style="margin-top: 10px; margin-bottom:4px;">
+          <div id="">기타 공유 사항</div>
+          <input type="text" id="gitar_input">
         </div>
       </div>
       <div class="option">

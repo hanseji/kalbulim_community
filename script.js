@@ -62,7 +62,7 @@ function upload() {
     const reportTypeNodeList = document.querySelector('input[name="report_type"]:checked').value
 
     let regex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    if (regex.test(document.getElementById('location_input').value) == true) {
+    if (document.getElementById('location_input').value == null || regex.test(document.getElementById('location_input').value) == true) {
       if (location_array[0] != null && location_array[1] != null) {
         db.collection('location')
           .add({
@@ -71,7 +71,8 @@ function upload() {
             location: location_array,
             source: document.getElementById('location_input').value,
             type: reportTypeNodeList,
-            upload_time: new Date()
+            upload_time: new Date(),
+            subcontent: document.getElementById('gitar_input').value
           });
         alert("제보 완료되었습니다.");
         removeMarker();
@@ -277,11 +278,16 @@ function showKalbilimPoint() {
                 imageOption = {offset: new kakao.maps.Point(16, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                 trust = '낮음'
           }
+          var subcontent = result.data().subcontent
+          if(result.data().subcontent == undefined) {subcontent = ""}
+          var source = result.data().source
+          if(result.data().source == undefined) {source = ""}
           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
           var content = `<div id="info">
           <b>${result.data().type + " " + result.data().danger_grade}</b>
           ${calculate_date(result.data().upload_time.toDate())}<br>
-          <a href=${result.data().source}>${result.data().source}</a><br>
+          <a href=${source}>${source}</a><br>
+          ${subcontent}<br>
           신뢰도 ${trust} 
           </div>`
           addKalbulimMarker(markerImage, new kakao.maps.LatLng(result.data().location[0], result.data().location[1]), content);
@@ -312,11 +318,16 @@ function showTypoonPoint() {
                 imageOption = {offset: new kakao.maps.Point(16, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                 trust = '낮음'
           }
+          var subcontent = result.data().subcontent
+          if(result.data().subcontent === "undefined" ) {subcontent = ""}
+          var source = result.data().source
+          if(result.data().source === "undefined" ) {source = ""}
           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
           var content = `<div id="info">
           <b>${result.data().type + " " + result.data().danger_grade}</b>
           ${calculate_date(result.data().upload_time.toDate())}<br>
-          <a href=${result.data().source}>${result.data().source}</a><br>
+          <a href=${source}>${source}</a><br>
+          ${subcontent}<br>
           신뢰도 ${trust} 
           </div>`
           addTypoonMarker(markerImage, new kakao.maps.LatLng(result.data().location[0], result.data().location[1]), content);
