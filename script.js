@@ -529,8 +529,8 @@ function changeReportType(){
   }
 }
 
-showHighTrustKalbilimPoint()
-showHighTrustTypoonPoint()
+showKalbilimPoint()
+showTypoonPoint()
 function getCheckboxValue() {
 
   // 선택된 목록 가져오기
